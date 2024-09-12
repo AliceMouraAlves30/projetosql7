@@ -1,0 +1,38 @@
+CREATE DATABASE GestaoFuncionarios;
+
+USE GestaoFuncionarios;
+
+CREATE TABLE Departamentos (
+    id_departamento INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+);
+
+CREATE TABLE Funcionarios (
+    id_funcionario INT AUTO_INCREMENT PRIMARY KEY, 
+    nome VARCHAR(100) NOT NULL,
+    cargo nome VARCHAR(50) NOT NULL,
+    salario DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (id_departamento) REFERENCES Departamentos(id_departamento)
+);
+
+CREATE TABLE Salarios (
+    id_salario INT AUTO_INCREMENT PRIMARY KEY, 
+    id_funcionario INT,
+    data DATE NOT NULL,
+    valor DECIMAL (10,2) DATE NOT NULL,
+    FOREIGN KEY (id_funcionario) REFERENCES Funcionarios(id_funcionario)
+);
+
+INSERT INTO Funcionarios (nome, cargo, salario) VALUES
+('Alice Moura','Cientista de Dados',5.000,00),
+('Betina Santos','Secretaria Executiva',4.000,00),
+('Felipe Neto','Faxineiro',2.000,00);
+
+INSERT INTO Depertamentos ( id_departamento, nome) VALUES
+(1,'Departamento de Ciência de Dados'),
+(2,'Departamento de Relações Institucionais'),
+(3,'Manutenção e Limpeza');
+
+INSERT INTO Salarios (id_salario,
+
+
