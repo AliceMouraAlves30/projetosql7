@@ -1,38 +1,67 @@
+DROP DATABASE GestaoFuncionarios;
+
 CREATE DATABASE GestaoFuncionarios;
 
 USE GestaoFuncionarios;
 
 CREATE TABLE Departamentos (
     id_departamento INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
+    nome VARCHAR(100) NOT NULL
 );
+
 
 CREATE TABLE Funcionarios (
     id_funcionario INT AUTO_INCREMENT PRIMARY KEY, 
     nome VARCHAR(100) NOT NULL,
-    cargo nome VARCHAR(50) NOT NULL,
+    cargo VARCHAR(50) NOT NULL,
     salario DECIMAL(10,2) NOT NULL,
+    id_departamento INT,
     FOREIGN KEY (id_departamento) REFERENCES Departamentos(id_departamento)
 );
+
 
 CREATE TABLE Salarios (
     id_salario INT AUTO_INCREMENT PRIMARY KEY, 
     id_funcionario INT,
     data DATE NOT NULL,
-    valor DECIMAL (10,2) DATE NOT NULL,
+    valor DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (id_funcionario) REFERENCES Funcionarios(id_funcionario)
 );
 
+-- Inserir dados na tabela Funcionarios
 INSERT INTO Funcionarios (nome, cargo, salario) VALUES
-('Alice Moura','Cientista de Dados',5.000,00),
-('Betina Santos','Secretaria Executiva',4.000,00),
-('Felipe Neto','Faxineiro',2.000,00);
+('Alice Moura', 'Cientista de Dados', 5000.00),
+('Betina Santos', 'Secretaria Executiva', 4000.00),
+('Felipe Neto', 'Faxineiro', 2000.00);
 
-INSERT INTO Depertamentos ( id_departamento, nome) VALUES
-(1,'Departamento de Ciência de Dados'),
-(2,'Departamento de Relações Institucionais'),
-(3,'Manutenção e Limpeza');
+-- Inserir dados na tabela Departamentos
+INSERT INTO Departamentos (id_departamento, nome) VALUES
+(1, 'Departamento de Ciência de Dados'),
+(2, 'Departamento de Relações Institucionais'),
+(3, 'Manutenção e Limpeza');
 
-INSERT INTO Salarios (id_salario,
+SELECT f.id_funcionario, f.nome AS NomeFuncionario, f.cargo, f.salario, d.nome AS NomeDepartamento
+FROM Funcionarios f
+JOIN Departamentos d ON f.id_departamento = d.id_departamento;
+
+SELECT d.nome AS NomeDepartamento, SUM(f.salario) AS TotalSalario
+FROM Funcionarios f
+JOIN Departamentos d ON f.id_departamento = d.id_departamento
+GROUP BY d.nome;
+
+SELECT 
+    f.id_funcionario, 
+    f.nome AS NomeFuncionario, 
+    f.cargo, 
+    f.salario, 
+    d.nome AS NomeDepartamento
+FROM 
+    Funcionarios f
+JOIN 
+    Departamentos d ON f.id_departamento = d.id_departamento;
+    
+    
+
+
 
 
