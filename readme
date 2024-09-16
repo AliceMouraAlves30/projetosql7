@@ -1,0 +1,58 @@
+# GestaoFuncionarios
+
+Este projeto gerencia informações sobre departamentos, funcionários e salários em uma empresa.
+
+## Estrutura do Banco de Dados
+
+### Tabelas
+
+1. **Departamentos**
+   - `id_departamento` INT AUTO_INCREMENT PRIMARY KEY
+   - `nome` VARCHAR(100) NOT NULL
+
+2. **Funcionarios**
+   - `id_funcionario` INT AUTO_INCREMENT PRIMARY KEY
+   - `nome` VARCHAR(100) NOT NULL
+   - `cargo` VARCHAR(50) NOT NULL
+   - `salario` DECIMAL(10,2) NOT NULL
+   - `id_departamento` INT
+   - FOREIGN KEY (`id_departamento`) REFERENCES `Departamentos(id_departamento)`
+
+3. **Salarios**
+   - `id_salario` INT AUTO_INCREMENT PRIMARY KEY
+   - `id_funcionario` INT
+   - `data` DATE NOT NULL
+   - `valor` DECIMAL(10,2) NOT NULL
+   - FOREIGN KEY (`id_funcionario`) REFERENCES `Funcionarios(id_funcionario)`
+
+## Instruções
+
+1. **Criar o Banco de Dados e Tabelas**
+   Execute o script SQL para criar o banco de dados e as tabelas:
+
+   ```sql
+   DROP DATABASE IF EXISTS GestaoFuncionarios;
+   CREATE DATABASE GestaoFuncionarios;
+   USE GestaoFuncionarios;
+
+   CREATE TABLE Departamentos (
+       id_departamento INT AUTO_INCREMENT PRIMARY KEY,
+       nome VARCHAR(100) NOT NULL
+   );
+
+   CREATE TABLE Funcionarios (
+       id_funcionario INT AUTO_INCREMENT PRIMARY KEY, 
+       nome VARCHAR(100) NOT NULL,
+       cargo VARCHAR(50) NOT NULL,
+       salario DECIMAL(10,2) NOT NULL,
+       id_departamento INT,
+       FOREIGN KEY (id_departamento) REFERENCES Departamentos(id_departamento)
+   );
+
+   CREATE TABLE Salarios (
+       id_salario INT AUTO_INCREMENT PRIMARY KEY, 
+       id_funcionario INT,
+       data DATE NOT NULL,
+       valor DECIMAL(10,2) NOT NULL,
+       FOREIGN KEY (id_funcionario) REFERENCES Funcionarios(id_funcionario)
+   );
